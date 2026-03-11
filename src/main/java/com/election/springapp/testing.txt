@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS test (
+    id SERIAL PRIMARY KEY,
+    word VARCHAR(50) UNIQUE
+);
+
+INSERT INTO test (word) VALUES
+('huhh'),
+('hmmm')
+ON CONFLICT (word) DO NOTHING;
