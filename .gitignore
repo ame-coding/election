@@ -31,3 +31,61 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Maven
+
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Logs
+
+*.log
+
+# Compiled Java
+
+*.class
+
+# Package files
+
+*.jar
+*.war
+*.ear
+
+# IDE - IntelliJ
+
+.idea/
+*.iml
+
+# IDE - Eclipse
+
+.project
+.classpath
+.settings/
+
+# IDE - VSCode
+
+.vscode/
+
+# OS files
+
+.DS_Store
+Thumbs.db
+
+# Environment / secrets
+
+.env
+.env.*
+
+# Node (if you ever add frontend tooling)
+
+node_modules/
+
+# Temporary files
+
+*.tmp
+*.swp
+*~
+
+# Spring Boot
+
+spring.log
