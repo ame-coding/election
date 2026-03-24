@@ -1,10 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Home Page</title></head>	
+<head>
+	<title>Home Page</title>
+	<link th:href="@{/css/home.css}" rel="stylesheet">
+</head>	
 <body>
-	<h2>Home</h2>	
-	<form th:action="@{/logout}" method="post">
-	    <button type="submit">Logout</button>
-	</form>
+	<nav class="topnav">
+		<a class="topenav__brand" href="#">MyApp</a>
+		<form th:action="@{/logout}" method="post">
+			<button type="submit" class="btn-logout">Logout</button>
+		</form>
+	</nav>
+	
+	<aside class="sidebar">
+		<span class="sidebar__label">Main</span>
+		<a th:href="@{/}" class="nav-btn active">Button 1</a>
+		<a th:href="@{/}" class="nav-btn">Button 2</a>
+		<a th:href="@{/}" class="nav-btn">Button 3</a>
+		
+		<div class="sidebar__divider"></div>
+		<span class="sidebar__label">Manage</span>
+		<a th:href="@{/}" class="nav-btn">Button 4</a>
+	</aside>
+	
+	<main class="main">
+		<h1 class="page-title">Dashboard</h1>
+		<p class="page-subtitle">Here's what's happening today.</p>
+		
+		<div class="card-grid">
+			<div class="card">
+				<div class="card__title">Title</div>
+				<div class="card__value">2027</div>
+				<div class="card__sub">Sub Text</div>
+			</div>
+		</div>
+		
+	</main>
+	
+	
 </body>
 </html>
