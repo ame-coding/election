@@ -3,6 +3,8 @@
 <head>
 	<title>Voter Page</title>
 	<link th:href="@{/css/home.css}" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="/js/assemblyconstituency.js"></script>
 </head>	
 <body>
 	<nav class="topnav">
@@ -14,7 +16,7 @@
 	
 	<aside class="sidebar">
 		<span class="sidebar__label">Main</span>
-		<a th:href="@{/}" class="nav-btn">Home</a>
+		<a th:href="@{/home}" class="nav-btn">Home</a>
 		<a th:href="@{/}" class="nav-btn active">Add Voters</a>
 		<a th:href="@{/}" class="nav-btn">Button 3</a>
 		
@@ -29,15 +31,17 @@
 		<form th:action="@{/}" method="post">
 				<div>
 					<label>Assembly Constituency</label>
-					<input type="text" name="ac" />
+					<select name="acdropdown" id="acdropdown" required>
+						<option value="">Select Assembly Constituency</option>
+					</select><br><br>
 				</div>
 				<div>
 					<label>Total Voters</label>
-					<input type="text" name="votercount" />
+					<input type="number" name="votercount" required />
 				</div>
 				<div>
 					<label>Votes Polled</label>
-					<input type="text" name="votespolled" />
+					<input type="number" name="votespolled" required />
 				</div>
 				<button type="submit">Enter</button>
 		</form>
