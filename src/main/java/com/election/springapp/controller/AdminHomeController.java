@@ -6,9 +6,5 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class AdminHomeController {
 	
-	@GetMapping("/addvoters")
-	public String addvotersPage() {
-		return "addvoters";
-	}
 	
 }

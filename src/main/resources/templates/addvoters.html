@@ -17,7 +17,7 @@
 	<aside class="sidebar">
 		<span class="sidebar__label">Main</span>
 		<a th:href="@{/home}" class="nav-btn">Home</a>
-		<a th:href="@{/}" class="nav-btn active">Add Voters</a>
+		<a th:href="@{/addvoters}" class="nav-btn active">Add Voters</a>
 		<a th:href="@{/}" class="nav-btn">Button 3</a>
 		
 		<div class="sidebar__divider"></div>
@@ -28,25 +28,138 @@
 	<main class="main">
 		<h1 class="page-title">Entry of Voters</h1>
 		
-		<form th:action="@{/}" method="post">
+		
+		<p th:if="${successMessage}" th:text="${successMessage}" style="color:green"></p>
+		<p th:if="${errorMessage}" th:text="${errorMessage}" style="color:red"></p>
+		<form id="addvoters" th:action="@{/addvoters}" th:object= "${votespolled}" method="post">
 				<div>
 					<label>Assembly Constituency</label>
-					<select name="acdropdown" id="acdropdown" required>
+					<select name="acdropdown" id="acdropdown" th:field="*{acno}" required>
 						<option value="">Select Assembly Constituency</option>
-					</select><br><br>
+					</select>
+					<span id="acdropdown-error" style="color:red"></span>
+					<span th:if="${#fields.hasErrors('acno')}" th:errors="*{acno}" style="color:red"></span>
+					<br><br>
 				</div>
 				<div>
 					<label>Total Voters</label>
-					<input type="number" name="votercount" required />
-				</div>
+					<input type="number" id="votercount" name="votercount" th:field="*{totalvoters}" required />
+					<span id="votercount-error" style="color:red"></span>
+					<span th:if="${#fields.hasErrors('totalvoters')}" th:errors="*{totalvoters}" style="color:red"></span>
+				</div><br><br>
 				<div>
 					<label>Votes Polled</label>
-					<input type="number" name="votespolled" required />
-				</div>
+					<input type="number" id="votespolled" name="votespolled" th:field="*{totalvotespolled}" required />
+					<span id="votespolled-error" style="color:red"></span>
+					<span th:if="${#fields.hasErrors('totalvotespolled')}" th:errors="*{totalvotespolled}" style="color:red"></span>
+				</div><br>
+				
 				<button type="submit">Enter</button>
 		</form>
 		
 	</main>
+	
+	
+	<script>
+		
+		function validateAC(){
+			
+			const input=document.querySelector('#acdropdown');
+			const error=document.querySelector('#acdropdown-error');
+						
+			if(input.value===''){
+				
+				error.textContent='Please select an option';
+				return false;
+				
+			}
+		
+			error.textContent='';
+			return true;
+				
+		}
+		
+		function validateTotalVoters(){
+			
+			const input=document.querySelector('#votercount');
+			const error=document.querySelector('#votercount-error');
+			const val=Number(input.value);
+			
+			if(input.value.trim() === ''){
+				
+				error.textContent='This field is required';
+				return false;
+				
+			}
+			
+			if(val<=9999){
+				
+				error.textContent='Total Voters must be greater than 9999';
+				return false;
+				
+			}
+			
+			error.textContent='';
+			if(document.querySelector('#votespolled').value !== '') validateVotesPolled();
+			return true;
+			
+		}
+	
+		function validateVotesPolled(){
+			
+			const input=document.querySelector('#votespolled');
+			const error=document.querySelector('#votespolled-error');
+			const val=Number(input.value);
+			const voters=Number(document.querySelector('#votercount').value);
+			
+			if(input.value.trim()===''){
+				
+				error.textContent='This field is required';
+				return false;
+				
+			}
+			
+			if(val<=9999){
+				
+				error.textContent='Votes Polled must be greater than 9999';
+				return false;
+				
+			}
+			
+			if(val>voters){
+				
+				error.textContent='Votes Polled cannot be greater than Total No. of Voters';
+				return false;
+				
+			}
+			
+			
+			error.textContent='';
+			return true;
+			
+		}
+		
+		//Listeners
+		document.querySelector('#acdropdown').addEventListener('change', validateAC);
+		document.querySelector('#votercount').addEventListener('input', validateTotalVoters);
+		document.querySelector('#votespolled').addEventListener('input', validateVotesPolled);
+		
+	
+		document.getElementById("addvoters").addEventListener("submit", function(e){
+			
+			const valid=validateAC() & validateTotalVoters() & validateVotesPolled();
+			
+			if(!valid){
+				
+				e.preventDefault();
+				alert('Please fix errors before submitting');
+				
+			}
+			
+		});
+		
+	</script>
+	
 	
 	
 </body>
