@@ -8,7 +8,7 @@
 </head>	
 <body>
 	<nav class="topnav">
-		<a class="topenav__brand" href="#">MyApp</a>
+		<a class="topenav__brand" href="#">Election Trends</a>
 		<form th:action="@{/logout}" method="post">
 			<button type="submit" class="btn-logout">Logout</button>
 		</form>
@@ -18,7 +18,7 @@
 		<span class="sidebar__label">Main</span>
 		<a th:href="@{/home}" class="nav-btn">Home</a>
 		<a th:href="@{/addvoters}" class="nav-btn active">Add Voters</a>
-		<a th:href="@{/}" class="nav-btn">Button 3</a>
+		<a th:href="@{/addparty}" class="nav-btn">Add Party</a>
 		
 		<div class="sidebar__divider"></div>
 		<span class="sidebar__label">Manage</span>
