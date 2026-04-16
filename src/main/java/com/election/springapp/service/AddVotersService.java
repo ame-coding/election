@@ -1,5 +1,7 @@
 package com.election.springapp.service;
 
+import java.util.List;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.election.springapp.model.AddVotersDto;
 import com.election.springapp.model.User;
+import com.election.springapp.model.VotesPolled;
 import com.election.springapp.repository.AddVotersRepository;
 
 @Service
@@ -33,6 +36,13 @@ public class AddVotersService {
 		}
 		
 		addVotersRepo.save(dto, createdById);
+	}
+	
+	
+	public List<VotesPolled> findAll(){
+		
+		return addVotersRepo.findAll();
+	
 	}
 	
 	

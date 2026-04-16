@@ -2,30 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Home Page</title>
-	<link th:href="@{/css/home.css}" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/base.css}">
+	<link rel="stylesheet" th:href="@{/css/layout.css}">
+	<link rel="stylesheet" th:href="@{/css/card.css}">
 </head>	
 <body>
-	<nav class="topnav">
-		<a class="topenav__brand" href="#">Election Trends</a>
-		<form th:action="@{/logout}" method="post">
-			<button type="submit" class="btn-logout">Logout</button>
-		</form>
-	</nav>
-	
-	<aside class="sidebar">
-		<span class="sidebar__label">Main</span>
-		<a th:href="@{/home}" class="nav-btn active">Home</a>
-		<a th:href="@{/addvoters}" class="nav-btn">Add Voters</a>
-		<a th:href="@{/addparty}" class="nav-btn">Add Party</a>
-		
-		<div class="sidebar__divider"></div>
-		<span class="sidebar__label">Manage</span>
-		<a th:href="@{/}" class="nav-btn">Button 4</a>
-	</aside>
+	<div class="layout">
+	<div th:replace="~{fragments/layout :: topnav}"></div>
+	<div th:replace="~{fragments/layout :: sidebar('home')}"></div>
 	
 	<main class="main">
 		<h1 class="page-title">Dashboard</h1>
-		<p class="page-subtitle">Here's what's happening today.</p>
+		<p class="page-subtitle">Election Trends</p>
 		
 		<div class="card-grid">
 			<div class="card">
@@ -37,6 +25,7 @@
 		
 	</main>
 	
-	
+	<div th:replace="~{fragments/layout :: footer}"></div>
+	</div>
 </body>
 </html>

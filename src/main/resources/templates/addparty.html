@@ -2,56 +2,69 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Add Party Page</title>
-	<link th:href="@{/css/home.css}" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/base.css}">
+	<link rel="stylesheet" th:href="@{/css/layout.css}">
+	<link rel="stylesheet" th:href="@{/css/card.css}">
+	<link rel="stylesheet" th:href="@{/css/form.css}">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>	
 <body>
-	<nav class="topnav">
-		<a class="topenav__brand" href="#">Election Trends</a>
-		<form th:action="@{/logout}" method="post">
-			<button type="submit" class="btn-logout">Logout</button>
-		</form>
-	</nav>
-	
-	<aside class="sidebar">
-		<span class="sidebar__label">Main</span>
-		<a th:href="@{/home}" class="nav-btn">Home</a>
-		<a th:href="@{/addvoters}" class="nav-btn">Add Voters</a>
-		<a th:href="@{/addparty}" class="nav-btn active">Add Party</a>
-		
-		<div class="sidebar__divider"></div>
-		<span class="sidebar__label">Manage</span>
-		<a th:href="@{/}" class="nav-btn">Button 4</a>
-	</aside>
+	<div class="layout">
+	<div th:replace="~{fragments/layout :: topnav}"></div>
+	<div th:replace="~{fragments/layout :: sidebar('addparty')}"></div>
 	
 	<main class="main">
 		<h1 class="page-title">Entry of Party</h1>
 		
+	
+		<p th:if="${successMessage}" th:text="${successMessage}" class="alert alert-success"></p>
+		<p th:if="${errorMessage}" th:text="${errorMessage}" class="alert alert-error"></p>
 		
-		<p th:if="${successMessage}" th:text="${successMessage}" style="color:green"></p>
-		<p th:if="${errorMessage}" th:text="${errorMessage}" style="color:red"></p>
-		
-		<form id="addparty" th:action="@{/addparty}" th:object= "${partydetails}" method="post">
-			<div>
-				<label>Party Name</label>
-				<input type="text" id="partyname" name="partyname" th:field="*{name}" required />
-				<span id="partyname-error" style="color:red"></span>
-				<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:red"></span>
-			</div><br><br>
-			<div>
-				<label>Party Abbreviation</label>
-				<input type="text" id="partyabbr" name="partyabbr" th:field="*{abbreviation}" required />
-				<span id="partyabbr-error" style="color:red"></span>
-				<span th:if="${#fields.hasErrors('abbreviation')}" th:errors="*{abbreviation}" style="color:red"></span>
-			</div><br><br>
-			<div>
-				<label>Party Symbol</label>
-				<input type="file" id="partysymbol" name="partysymbol" accept="imagine/*" th:field="*{symbol}" required />
-			</div><br>
-			<button type="submit">Enter</button>
-		</form>
+		<div class="form-wrapper">
+			<form id="addparty" th:action="@{/addparty}" th:object= "${addPartyDto}" method="post" enctype="multipart/form-data">
+				<div class="form-group">
+					<label>Party Name</label>
+					<input type="text" id="partyname" name="partyname" th:field="*{name}" class="form-control" required />
+					<span id="partyname-error" class="form-error"></span>
+					<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="form-error"></span>
+				</div>
+				<div class="form-group">
+					<label>Party Abbreviation</label>
+					<input type="text" id="partyabbr" name="partyabbr" th:field="*{abbreviation}" class="form-control" required />
+					<span id="partyabbr-error" class="form-error"></span>
+					<span th:if="${#fields.hasErrors('abbreviation')}" th:errors="*{abbreviation}" class="form-error"></span>
+				</div>
+				<div class="form-group">
+					<label>Party Symbol</label>
+					<div style="display: flex; align-items: center; gap: 10px;">
+					    <label class="file-label" for="partysymbol">
+					        Choose File
+					    </label>
+					    <span class="file-name" id="file-name-display">No file chosen</span>
+					</div>
+					<input type="file" id="partysymbol" name="symbol" accept="image/*" required />
+					<span th:if="${fileError}" th:text="${fileError}" class="form-error"></span>
+				</div>
+				<button type="submit" class="btn-primary">Enter</button>
+			</form>
+		</div>
 		
 	</main>
+
+	<div th:replace="~{fragments/layout :: footer}"></div>
+
+	</div>
+
 	
+	<script>
+		
+		document.getElementById('partysymbol').addEventListener('change', function () {
+		    const display = document.getElementById('file-name-display');
+		    display.textContent = this.files[0] ? this.files[0].name : 'No file chosen';
+		});
+	
+	</script>
+	
+		
 </body>
 </html>

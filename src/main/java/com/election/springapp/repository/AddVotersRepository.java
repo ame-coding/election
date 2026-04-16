@@ -1,9 +1,13 @@
 package com.election.springapp.repository;
 
+import java.util.List;
+
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.election.springapp.model.AddVotersDto;
+import com.election.springapp.model.VotesPolled;
 
 @Repository
 public class AddVotersRepository{
@@ -31,6 +35,16 @@ public class AddVotersRepository{
 		return count != null && count > 0;
 		
 	}
+	
+	public List<VotesPolled> findAll(){
+		
+		String sql="SELECT ac.acname AS ac, COALESCE(vp.totalvoters, '0') AS totalvoters, COALESCE(vp.totalvotespolled, '0') AS votespolled FROM masters.assemblyconstituencies ac LEFT JOIN electionstrends.voters vp ON ac.acno=vp.acno WHERE ac.acno<99 ORDER BY ac.acno";
+	
+		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(VotesPolled.class));
+		
+	}
+	
+	
 	
 	
 }

@@ -47,8 +47,19 @@ public class AddVotersController {
 		return acService.getAssemblyConstituencies();		
 	}
 	
+	@GetMapping("/votespolled")
+	public String votespolledPage(Model model) {
+		
+		model.addAttribute("votespolled", addVotersService.findAll());
+		return "votespolled";
+		
+		
+	}
+	
+	
+	
 	@PostMapping("/addvoters")
-	public String addCustomer(
+	public String addVoters(
 			@Valid @ModelAttribute("votespolled") AddVotersDto dto,
 			BindingResult bindingResult,
 			RedirectAttributes redirectAttributes) {

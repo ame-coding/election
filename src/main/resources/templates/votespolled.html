@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Votes Polled Page</title>
+	<link rel="stylesheet" th:href="@{/css/base.css}">
+	<link rel="stylesheet" th:href="@{/css/layout.css}">
+	<link rel="stylesheet" th:href="@{/css/card.css}">
+	<link rel="stylesheet" th:href="@{/css/table.css}">
+</head>	
+<body>
+
+	<div class="layout">
+	<div th:replace="~{fragments/layout :: topnav}"></div>
+	<div th:replace="~{fragments/layout :: sidebar('votespolled')}"></div>
+	
+	<main class="main">
+		<h1 class="page-title">List of Votes Polled</h1>	
+		
+		<table>
+			<thead>
+				<th>Assembly Constituency Name</th>
+				<th>Total No. of Voters</th>
+				<th>No. of Votes Polled</th>
+			</thead>
+			<tbody>
+				<tr th:each="polled: ${votespolled}">
+					<td th:text="${polled.ac}"></td>
+					<td th:text="${polled.totalvoters == 0 ? '-':polled.totalvoters}"></td>
+					<td th:text="${polled.votespolled == 0 ? '-':polled.votespolled}"></td>
+				</tr>
+			</tbody>
+		</table>
+					
+	</main>
+	
+	<div th:replace="~{fragments/layout :: footer}"></div>
+
+	</div>
+	
+	
+</body>
+</html>

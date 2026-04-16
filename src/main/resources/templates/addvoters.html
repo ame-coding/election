@@ -2,63 +2,60 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Voter Page</title>
-	<link th:href="@{/css/home.css}" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/base.css}">
+	<link rel="stylesheet" th:href="@{/css/layout.css}">
+	<link rel="stylesheet" th:href="@{/css/card.css}">
+	<link rel="stylesheet" th:href="@{/css/form.css}">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="/js/assemblyconstituency.js"></script>
 </head>	
 <body>
-	<nav class="topnav">
-		<a class="topenav__brand" href="#">Election Trends</a>
-		<form th:action="@{/logout}" method="post">
-			<button type="submit" class="btn-logout">Logout</button>
-		</form>
-	</nav>
 	
-	<aside class="sidebar">
-		<span class="sidebar__label">Main</span>
-		<a th:href="@{/home}" class="nav-btn">Home</a>
-		<a th:href="@{/addvoters}" class="nav-btn active">Add Voters</a>
-		<a th:href="@{/addparty}" class="nav-btn">Add Party</a>
-		
-		<div class="sidebar__divider"></div>
-		<span class="sidebar__label">Manage</span>
-		<a th:href="@{/}" class="nav-btn">Button 4</a>
-	</aside>
+	
+	<div class="layout">
+	<div th:replace="~{fragments/layout :: topnav}"></div>
+	<div th:replace="~{fragments/layout :: sidebar('addvoters')}"></div>
 	
 	<main class="main">
 		<h1 class="page-title">Entry of Voters</h1>
 		
 		
-		<p th:if="${successMessage}" th:text="${successMessage}" style="color:green"></p>
-		<p th:if="${errorMessage}" th:text="${errorMessage}" style="color:red"></p>
-		<form id="addvoters" th:action="@{/addvoters}" th:object= "${votespolled}" method="post">
-				<div>
-					<label>Assembly Constituency</label>
-					<select name="acdropdown" id="acdropdown" th:field="*{acno}" required>
-						<option value="">Select Assembly Constituency</option>
-					</select>
-					<span id="acdropdown-error" style="color:red"></span>
-					<span th:if="${#fields.hasErrors('acno')}" th:errors="*{acno}" style="color:red"></span>
-					<br><br>
-				</div>
-				<div>
-					<label>Total Voters</label>
-					<input type="number" id="votercount" name="votercount" th:field="*{totalvoters}" required />
-					<span id="votercount-error" style="color:red"></span>
-					<span th:if="${#fields.hasErrors('totalvoters')}" th:errors="*{totalvoters}" style="color:red"></span>
-				</div><br><br>
-				<div>
-					<label>Votes Polled</label>
-					<input type="number" id="votespolled" name="votespolled" th:field="*{totalvotespolled}" required />
-					<span id="votespolled-error" style="color:red"></span>
-					<span th:if="${#fields.hasErrors('totalvotespolled')}" th:errors="*{totalvotespolled}" style="color:red"></span>
-				</div><br>
-				
-				<button type="submit">Enter</button>
-		</form>
+		<p th:if="${successMessage}" th:text="${successMessage}" class="alert alert-success"></p>
+		<p th:if="${errorMessage}" th:text="${errorMessage}" class="alert alert-error"></p>
+		
+		<div class="form-wrapper">
+			<form id="addvoters" th:action="@{/addvoters}" th:object= "${votespolled}" method="post">
+					<div class="form-group">
+						<label>Assembly Constituency</label>
+						<select class="form-control" name="acdropdown" id="acdropdown" th:field="*{acno}" required>
+							<option value="">Select Assembly Constituency</option>
+						</select>
+						<span id="acdropdown-error" class="form-error"></span>
+						<span th:if="${#fields.hasErrors('acno')}" th:errors="*{acno}" class="form-error"></span>
+					</div>
+					<div class="form-group">
+						<label>Total Voters</label>
+						<input type="number" id="votercount" name="votercount" th:field="*{totalvoters}" class="form-control" required />
+						<span id="votercount-error" class="form-error"></span>
+						<span th:if="${#fields.hasErrors('totalvoters')}" th:errors="*{totalvoters}" class="form-error"></span>
+					</div>
+					<div class="form-group">
+						<label>Votes Polled</label>
+						<input type="number" id="votespolled" name="votespolled" th:field="*{totalvotespolled}" class="form-control" required />
+						<span id="votespolled-error" class="form-error"></span>
+						<span th:if="${#fields.hasErrors('totalvotespolled')}" th:errors="*{totalvotespolled}" class="form-error"></span>
+					</div>
+					
+					<button type="submit" class="btn-primary">Enter</button>
+			</form>
+		</div>
+
 		
 	</main>
+
+	<div th:replace="~{fragments/layout :: footer}"></div>
 	
+	</div>
 	
 	<script>
 		
