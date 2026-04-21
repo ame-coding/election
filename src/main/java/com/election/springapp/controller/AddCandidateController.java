@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.election.springapp.model.AddCandidateDto;
 import com.election.springapp.service.AddCandidateService;
-
+import com.election.springapp.service.CandidateService;
 
 import jakarta.validation.Valid;
 
@@ -23,10 +23,12 @@ public class AddCandidateController {
 	
 	private static final Logger log = LoggerFactory.getLogger(AddVotersController.class);
 	private final AddCandidateService addCandidateService;
+	private final CandidateService candidateService;
 	
-	public AddCandidateController (AddCandidateService addCandidateService) {
+	public AddCandidateController (AddCandidateService addCandidateService, CandidateService candidateService) {
 		
 		this.addCandidateService=addCandidateService;
+		this.candidateService=candidateService;
 		
 	}
 	
@@ -37,6 +39,22 @@ public class AddCandidateController {
 		return "addcandidate";
 		
 	}
+	
+	
+	@GetMapping("/viewcandidates")
+	public String viewCandidatesPage(Model model) {
+		
+		model.addAttribute("viewCandidates", candidateService.showCandidateDetails());
+		return "viewcandidates";
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	@PostMapping("/addcandidate")
@@ -68,6 +86,10 @@ public class AddCandidateController {
 		
 		
 	}
+	
+	
+	
+	
 	
 	
 	

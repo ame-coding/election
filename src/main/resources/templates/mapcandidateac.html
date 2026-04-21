@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Map Candidate to AC Page</title>
+	<link rel="stylesheet" th:href="@{/css/base.css}">
+	<link rel="stylesheet" th:href="@{/css/layout.css}">
+	<link rel="stylesheet" th:href="@{/css/card.css}">
+	<link rel="stylesheet" th:href="@{/css/form.css}">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="/js/candidate.js"></script>
+	<script src="/js/assemblyconstituency.js"></script>
+</head>
+<body>
+	
+	<div class="layout">
+		<div th:replace="~{fragments/layout :: topnav}"></div>
+		<div th:replace="~{fragments/layout :: sidebar('mapcandidateac')}"></div>
+		
+		<main class="main">
+				<h1 class="page-title">Mapping Candidate to AC</h1>
+				
+			
+				<p th:if="${successMessage}" th:text="${successMessage}" class="alert alert-success"></p>
+				<p th:if="${errorMessage}" th:text="${errorMessage}" class="alert alert-error"></p>
+				
+				
+				<div class="form-wrapper">
+					<form id="mapcandidateac" th:action="@{/mapcandidateac}" th:object= "${mapCandidateAcDto}" method="post">
+						<div class="form-group">
+							<label>Candidate Name</label>
+							<select class="form-control" name="candidatedropdown" id="candidatedropdown" th:field="*{candidateCode}" required>
+								<option value="">Select Candidate</option>
+							</select>
+							<span id="candidatedropdown-error" class="form-error"></span>
+							<span th:if="${#fields.hasErrors('candidateCode')}" th:errors="*{candidateCode}" class="form-error"></span>						
+						</div>
+						<div class="form-group">
+							<label>Assembly Constituency</label>
+							<select class="form-control" name="acdropdown" id="acdropdown" th:field="*{acno}" required>
+								<option value="">Select Assembly Constituency</option>
+							</select>
+							<span id="acdropdown-error" class="form-error"></span>
+							<span th:if="${#fields.hasErrors('acno')}" th:errors="*{acno}" class="form-error"></span>
+						</div>
+						<button type="submit" class="btn-primary">Enter</button>
+					</form>
+				</div>
+				
+			</main>
+				
+		
+		
+	</div>
+	
+	
+	
+</body>

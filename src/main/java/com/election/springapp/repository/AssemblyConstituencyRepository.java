@@ -21,7 +21,7 @@ public class AssemblyConstituencyRepository{
 	
 	public List<AssemblyConstituency> getAssemblyConstituencies(){
 		
-		String sql="SELECT acno, acname AS name FROM masters.assemblyconstituencies WHERE acno!=99";
+		String sql="SELECT acno, acname AS name FROM masters.assemblyconstituencies WHERE acno!=99 ORDER BY acno";
 		
 		return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(AssemblyConstituency.class));
 		

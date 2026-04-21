@@ -1,0 +1,39 @@
+package com.election.springapp.repository;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.election.springapp.model.MapCandidateAcDto;
+
+@Repository
+public class MapCandidateAcRepository {
+	
+	private JdbcTemplate jdbcTemplate;
+	
+	public MapCandidateAcRepository (JdbcTemplate jdbcTemplate) {
+		
+		this.jdbcTemplate=jdbcTemplate;
+		
+	}
+	
+	public void save (MapCandidateAcDto dto, Long createdById) {
+		
+		String sql = "INSERT INTO masterstrends.candidatesacsmap (candidatecode, acno, userid) VALUES (?, ?, ?)";
+	
+		jdbcTemplate.update(sql, dto.getCandidateCode(), dto.getAcno(), createdById);
+		
+	}
+	
+	public Boolean existsByMapping(MapCandidateAcDto dto) {
+		
+		String sql = "SELECT COUNT(*) FROM masterstrends.candidatesacsmap WHERE candidatecode = ? AND acno = ?";
+		Integer count = jdbcTemplate.queryForObject(sql, Integer.class, dto.getCandidateCode(),dto.getAcno());
+		return count != null && count > 0;
+
+		
+	}
+	
+	
+	
+	
+}

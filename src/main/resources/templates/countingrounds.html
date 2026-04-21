@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Map Candidate to AC Page</title>
+	<link rel="stylesheet" th:href="@{/css/base.css}">
+	<link rel="stylesheet" th:href="@{/css/layout.css}">
+	<link rel="stylesheet" th:href="@{/css/card.css}">
+	<link rel="stylesheet" th:href="@{/css/form.css}">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="/js/assemblyconstituency.js"></script>
+</head>
+<body>
+	
+	<div class="layout">
+		
+		<div th:replace="~{fragments/layout :: topnav}"></div>
+		<div th:replace="~{fragments/layout :: sidebar('countingrounds')}"></div>
+		
+		<main class="main">
+				<h1 class="page-title">Counting Rounds</h1>
+				
+			
+				<p th:if="${successMessage}" th:text="${successMessage}" class="alert alert-success"></p>
+				<p th:if="${errorMessage}" th:text="${errorMessage}" class="alert alert-error"></p>
+				
+				
+				<div class="form-wrapper">
+					<form id="countingrounds" th:action="@{/countingrounds}" th:object= "${countingrounds}" method="post">
+						<div class="form-group">
+							<label>Assembly Constituency</label>
+							<select class="form-control" name="acdropdown" id="acdropdown" th:field="*{acno}" required>
+								<option value="">Select Assembly Constituency</option>
+							</select>
+							<span id="acdropdown-error" class="form-error"></span>
+							<span th:if="${#fields.hasErrors('acno')}" th:errors="*{acno}" class="form-error"></span>						
+						</div>
+						<div class="form-group">
+							<label>Round No</label>
+							<input type="number" th:field="*{roundno}" id="roundno" min="1" class="form-control" required />
+							<small id="nextHint" style="color: grey;">
+								Expected: <span th:text="${nextRoundNo}"></span>
+							</small>
+							<span id="roundno-error" class="form-error"></span>
+							<span th:if="${#fields.hasErrors('roundno')}" th:errors="*{roundno}" class="form-error"></span>
+						</div>
+						<div class="form-group">
+							<label>Type of Round</label>
+							<input type="text" id="rounddesc" name="rounddesc" th:field="*{desc}" class="form-control" required />
+							<span id="rounddesc-error" class="form-error"></span>
+							<span th:if="${#fields.hasErrors('desc')}" th:errors="*{desc}" class="form-error"></span>
+						</div>
+						<button type="submit" class="btn-primary">Enter</button>
+					</form>
+				</div>
+				
+			</main>
+	
+			<div th:replace="~{fragments/layout :: footer}"></div>
+						
+	</div>
+	
+	<script>
+	    $('#acdropdown').on('change', function () {
+	        const code = $(this).val();
+	        if (!code) return;
+
+	        $.get('/countingrounds/next-no', { acno: code }, function (nextNo) {
+	            $('#roundno').val(nextNo);
+	            $('#nextHint span').text(nextNo);
+	        });
+	    });
+	</script>
+	
+	
+	
+</body>
+</html>

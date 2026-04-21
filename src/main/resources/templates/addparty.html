@@ -10,48 +10,48 @@
 </head>	
 <body>
 	<div class="layout">
-	<div th:replace="~{fragments/layout :: topnav}"></div>
-	<div th:replace="~{fragments/layout :: sidebar('addparty')}"></div>
-	
-	<main class="main">
-		<h1 class="page-title">Entry of Party</h1>
+		<div th:replace="~{fragments/layout :: topnav}"></div>
+		<div th:replace="~{fragments/layout :: sidebar('addparty')}"></div>
 		
-	
-		<p th:if="${successMessage}" th:text="${successMessage}" class="alert alert-success"></p>
-		<p th:if="${errorMessage}" th:text="${errorMessage}" class="alert alert-error"></p>
+		<main class="main">
+			<h1 class="page-title">Entry of Party</h1>
+			
 		
-		<div class="form-wrapper">
-			<form id="addparty" th:action="@{/addparty}" th:object= "${addPartyDto}" method="post" enctype="multipart/form-data">
-				<div class="form-group">
-					<label>Party Name</label>
-					<input type="text" id="partyname" name="partyname" th:field="*{name}" class="form-control" required />
-					<span id="partyname-error" class="form-error"></span>
-					<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="form-error"></span>
-				</div>
-				<div class="form-group">
-					<label>Party Abbreviation</label>
-					<input type="text" id="partyabbr" name="partyabbr" th:field="*{abbreviation}" class="form-control" required />
-					<span id="partyabbr-error" class="form-error"></span>
-					<span th:if="${#fields.hasErrors('abbreviation')}" th:errors="*{abbreviation}" class="form-error"></span>
-				</div>
-				<div class="form-group">
-					<label>Party Symbol</label>
-					<div style="display: flex; align-items: center; gap: 10px;">
-					    <label class="file-label" for="partysymbol">
-					        Choose File
-					    </label>
-					    <span class="file-name" id="file-name-display">No file chosen</span>
+			<p th:if="${successMessage}" th:text="${successMessage}" class="alert alert-success"></p>
+			<p th:if="${errorMessage}" th:text="${errorMessage}" class="alert alert-error"></p>
+			
+			<div class="form-wrapper">
+				<form id="addparty" th:action="@{/addparty}" th:object= "${addPartyDto}" method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label>Party Name</label>
+						<input type="text" id="partyname" name="partyname" th:field="*{name}" class="form-control" required />
+						<span id="partyname-error" class="form-error"></span>
+						<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="form-error"></span>
 					</div>
-					<input type="file" id="partysymbol" name="symbol" accept="image/*" required />
-					<span th:if="${fileError}" th:text="${fileError}" class="form-error"></span>
-				</div>
-				<button type="submit" class="btn-primary">Enter</button>
-			</form>
-		</div>
-		
-	</main>
-
-	<div th:replace="~{fragments/layout :: footer}"></div>
+					<div class="form-group">
+						<label>Party Abbreviation</label>
+						<input type="text" id="partyabbr" name="partyabbr" th:field="*{abbreviation}" class="form-control" required />
+						<span id="partyabbr-error" class="form-error"></span>
+						<span th:if="${#fields.hasErrors('abbreviation')}" th:errors="*{abbreviation}" class="form-error"></span>
+					</div>
+					<div class="form-group">
+						<label>Party Symbol</label>
+						<div style="display: flex; align-items: center; gap: 10px;">
+						    <label class="file-label" for="partysymbol">
+						        Choose File
+						    </label>
+						    <span class="file-name" id="file-name-display">No file chosen</span>
+						</div>
+						<input type="file" id="partysymbol" name="symbol" accept="image/*" required />
+						<span th:if="${fileError}" th:text="${fileError}" class="form-error"></span>
+					</div>
+					<button type="submit" class="btn-primary">Enter</button>
+				</form>
+			</div>
+			
+		</main>
+	
+		<div th:replace="~{fragments/layout :: footer}"></div>
 
 	</div>
 

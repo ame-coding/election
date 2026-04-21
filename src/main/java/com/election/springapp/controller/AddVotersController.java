@@ -1,21 +1,16 @@
 package com.election.springapp.controller;
 
-import java.util.List;
-
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.election.springapp.model.AddVotersDto;
-import com.election.springapp.model.AssemblyConstituency;
 import com.election.springapp.service.AddVotersService;
-import com.election.springapp.service.AssemblyConstituencyService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,11 +21,9 @@ import jakarta.validation.Valid;
 public class AddVotersController {
 	
 	private static final Logger log = LoggerFactory.getLogger(AddVotersController.class);
-	private final AssemblyConstituencyService acService;
 	private final AddVotersService addVotersService;
 	
-	public AddVotersController(AssemblyConstituencyService acService, AddVotersService addVotersService) {
-		this.acService=acService;
+	public AddVotersController(AddVotersService addVotersService) {
 		this.addVotersService=addVotersService;
 	}
 	
@@ -39,13 +32,7 @@ public class AddVotersController {
 		model.addAttribute("votespolled", new AddVotersDto());
 		return "addvoters";
 	}
-	
-	@GetMapping("/ac")
-	@ResponseBody
-	public List<AssemblyConstituency> getAssemblyConstituencies() {
-		
-		return acService.getAssemblyConstituencies();		
-	}
+
 	
 	@GetMapping("/votespolled")
 	public String votespolledPage(Model model) {

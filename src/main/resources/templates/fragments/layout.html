@@ -15,10 +15,13 @@
 	    <a th:href="@{/addvoters}" th:classappend="${activePage == 'addvoters'} ? ' active'" class="nav-btn">Add Voters</a>
 	    <a th:href="@{/addparty}"      th:classappend="${activePage == 'addparty'}      ? ' active'" class="nav-btn">Add Party</a>
 	    <a th:href="@{/addcandidate}"   th:classappend="${activePage == 'addcandidate'}   ? ' active'" class="nav-btn">Add Candidate</a>
+		<a th:href="@{/mapcandidateac}"   th:classappend="${activePage == 'mapcandidateac'}   ? ' active'" class="nav-btn">Map Candidate AC</a>
+		<a th:href="@{/countingrounds}"   th:classappend="${activePage == 'countingrounds'}   ? ' active'" class="nav-btn">Add Counting Rounds</a>
 
 	    <div class="sidebar__divider"></div>
 		<a th:href="@{/viewparties}"   th:classappend="${activePage == 'viewparties'}   ? ' active'" class="nav-btn">View Parties</a>
 		<a th:href="@{/votespolled}"   th:classappend="${activePage == 'votespolled'}   ? ' active'" class="nav-btn">View Votes Polled</a>
+		<a th:href="@{/viewcandidates}"   th:classappend="${activePage == 'viewcandidates'}   ? ' active'" class="nav-btn">View Candidates</a>
 
 	</aside>
 	
