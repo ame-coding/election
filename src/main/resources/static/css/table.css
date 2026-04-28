@@ -36,3 +36,21 @@ td img {
     border-radius: 6px;
     object-fit: cover;
 }
+
+.search-input {
+    width: 300px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.search-input:focus {
+    border-color: #4a90e2;
+}
+
+.search-input::placeholder {
+    color: #aaa;
+}

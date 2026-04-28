@@ -60,4 +60,14 @@ public class PartyRepository {
 	}
 	
 	
+	public void deleteById(Long code) {
+		
+		String sql="DELETE from masterstrends.parties WHERE partycode=?";
+		jdbcTemplate.update(sql,code);
+		
+	}
+	
+	
+	
+	
 }

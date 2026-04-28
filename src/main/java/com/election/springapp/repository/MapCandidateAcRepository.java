@@ -33,7 +33,20 @@ public class MapCandidateAcRepository {
 		
 	}
 	
+	public Boolean candidateHasAcReference(Long code) {
+		
+		String sql="SELECT COUNT(*) FROM masterstrends.candidatesacsmap WHERE candidatecode = ?";
+		Integer count=jdbcTemplate.queryForObject(sql , Integer.class, code);
+		return count !=null && count>0;
+		
+	}
 	
+	public void deleteByCandidatecode(Long code) {
+		
+		String sql="DELETE FROM masterstrends.candidatesacsmap WHERE candidatecode = ?";
+		jdbcTemplate.update(sql, code);
+		
+	}
 	
 	
 }

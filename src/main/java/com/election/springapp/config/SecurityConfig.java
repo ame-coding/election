@@ -26,7 +26,7 @@ public class SecurityConfig {
 		http
 			.userDetailsService(userDetailsService)
 			.authorizeHttpRequests(auth -> auth
-					.requestMatchers("/login", "/register", "/css/**").permitAll()
+					.requestMatchers("/images/**","/login", "/register", "/css/**").permitAll()
 					.anyRequest().authenticated()
 					)
 					.formLogin(form -> form

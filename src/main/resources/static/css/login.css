@@ -49,6 +49,27 @@ body {
   letter-spacing: 0.5px;
 }
 
+.topnav__deco {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.topnav__deco--left {
+    height: 60px;
+    width: auto;
+    left: 175px;
+}
+
+.topnav__deco--right {
+    height: 50px;
+    width: auto;
+    right: 120px;
+}
+
+
 /* ── MAIN ── */
 .main {
   margin-top: 56px;

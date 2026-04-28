@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,10 +35,22 @@ public class CountingRoundsController {
 	public String countingroundsPage(Model model) {
 		
 		model.addAttribute("countingrounds", new CountingRounds());
+		model.addAttribute("viewrounds", service.findAll());
 		
 		return "countingrounds";
 		
 	}
+	
+	
+	@PostMapping("/countingrounds/delete/{acno}/{rounds}")
+	public String deleteRoundByRoundNo(@PathVariable Long acno, @PathVariable Long rounds) {
+		
+		service.deleteById(acno,rounds);
+		return "redirect:/countingrounds";
+		
+	}
+	
+	
 	
 	@PostMapping("/countingrounds")
 	public String countingrounds(
@@ -53,8 +66,8 @@ public class CountingRoundsController {
 		
 		try {
 			
-			service.save(dto);
-			redirectAttributes.addFlashAttribute("successMessage", "Counting round " + dto.getRoundno() + " successfully added for Assembly Constituency");
+			service.createCountingRounds(dto);
+			redirectAttributes.addFlashAttribute("successMessage", "Counting rounds successfully added for Assembly Constituency");
 			return "redirect:/countingrounds";
 			
 		} catch (IllegalArgumentException e) {

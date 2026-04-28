@@ -42,6 +42,7 @@ public class PartyController {
 	public String addPartyPage(Model model) {
 		
 		model.addAttribute("addPartyDto", new AddPartyDto());
+		model.addAttribute("viewparties", partyService.getPartyDetails());
 		return "addparty";
 		
 	}
@@ -77,6 +78,13 @@ public class PartyController {
 	}
 	
 	
+	@PostMapping("/parties/delete/{id}")
+	public String deletePartyByCode(@PathVariable Long id) {
+		
+		partyService.deleteById(id);
+		return "redirect:/addparty";
+		
+	}
 	
 	
 	@PostMapping("/addparty")

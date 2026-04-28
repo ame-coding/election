@@ -3,8 +3,15 @@
 <body>
 	
 	<nav th:fragment="topnav" class="topnav">
-	    <a class="topenav__brand" href="#">Election Trends</a>
-	    <form th:action="@{/logout}" method="post">
+		<img class="topnav__deco topnav__deco--left"
+		     th:src="@{/images/navlogo1.png}" alt="" />
+			 
+	    <a class="topnav__brand" href="#">Election Trends</a>
+		
+		<img class="topnav__deco topnav__deco--right"
+		     th:src="@{/images/navlogo2.png}" alt="" />
+	    
+		<form th:action="@{/logout}" method="post">
 	        <button type="submit" class="btn-logout">Logout</button>
 	    </form>
 	</nav>

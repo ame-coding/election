@@ -38,12 +38,19 @@ public class AddVotersRepository{
 	
 	public List<VotesPolled> findAll(){
 		
-		String sql="SELECT ac.acname AS ac, COALESCE(vp.totalvoters, '0') AS totalvoters, COALESCE(vp.totalvotespolled, '0') AS votespolled FROM masters.assemblyconstituencies ac LEFT JOIN electionstrends.voters vp ON ac.acno=vp.acno WHERE ac.acno<99 ORDER BY ac.acno";
+		String sql="SELECT ac.acno, ac.acname AS ac, COALESCE(vp.totalvoters, '0') AS totalvoters, COALESCE(vp.totalvotespolled, '0') AS votespolled FROM masters.assemblyconstituencies ac LEFT JOIN electionstrends.voters vp ON ac.acno=vp.acno WHERE ac.acno<99 ORDER BY ac.acno";
 	
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(VotesPolled.class));
 		
 	}
 	
+	
+	public void deleteById(Long id){
+		
+		String sql="DELETE FROM electionstrends.voters WHERE acno=?";
+		jdbcTemplate.update(sql, id);
+		
+	}
 	
 	
 	

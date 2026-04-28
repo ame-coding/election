@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 	<title>Home Page</title>
 	<link rel="stylesheet" th:href="@{/css/base.css}">
@@ -12,7 +13,7 @@
 	<div th:replace="~{fragments/layout :: sidebar('home')}"></div>
 	
 	<main class="main">
-		<h1 class="page-title">Dashboard</h1>
+		<p class="page-title" th:text="'Welcome, ' + ${#authentication.name} + '!'"></p>
 		<p class="page-subtitle">Election Trends</p>
 		
 		<div class="card-grid">

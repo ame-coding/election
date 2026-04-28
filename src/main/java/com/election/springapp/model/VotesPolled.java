@@ -3,11 +3,21 @@ package com.election.springapp.model;
 
 public class VotesPolled {
 	
+	private Integer acno;
+	
 	private String ac;
 	
 	private Integer totalvoters;
 	
 	private Integer votespolled;
+	
+	public Integer getAcno() {
+		return acno;
+	}
+
+	public void setAcno(Integer acno) {
+		this.acno = acno;
+	}
 
 	public String getAc() {
 		return ac;

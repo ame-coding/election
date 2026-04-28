@@ -31,6 +31,11 @@ public class PartyService {
 		return repo.findImageByCode(code);
 	}
 	
+	public void deleteById(Long code) {
+		repo.deleteById(code);
+		
+	}
+	
 	
 }
 

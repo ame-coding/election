@@ -1,0 +1,30 @@
+.warning-box {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    padding: 12px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.warning-message {
+    margin: 0;
+}
+
+.btn-confirm {
+    background: red;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-cancel {
+    padding: 6px 12px;
+    border-radius: 4px;
+    background: grey;
+    color: white;
+    text-decoration: none;
+}

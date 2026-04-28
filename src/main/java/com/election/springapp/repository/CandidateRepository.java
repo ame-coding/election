@@ -65,6 +65,12 @@ public class CandidateRepository {
 	
 	
 	
+	public void deleteByCode(Long code) {
+		
+		String sql = "DELETE from masterstrends.candidates WHERE candidatecode=?";
+		jdbcTemplate.update(sql, code);
+		
+	}
 	
 	
 	

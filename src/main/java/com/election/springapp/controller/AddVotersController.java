@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -29,7 +30,8 @@ public class AddVotersController {
 	
 	@GetMapping("/addvoters")
 	public String addvotersPage(Model model) {
-		model.addAttribute("votespolled", new AddVotersDto());
+		model.addAttribute("addvotersdto", new AddVotersDto());
+		model.addAttribute("votespolled", addVotersService.findAll());
 		return "addvoters";
 	}
 
@@ -43,6 +45,13 @@ public class AddVotersController {
 		
 	}
 	
+	@PostMapping("/votespolled/delete/{id}")
+	public String deleteVotesPolledByAc(@PathVariable Long id) {
+		
+		addVotersService.deleteById(id);
+		return "redirect:/addvoters";
+		
+	}
 	
 	
 	@PostMapping("/addvoters")

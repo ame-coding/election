@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -35,6 +36,8 @@ public class AddCandidateController {
 	@GetMapping("/addcandidate")
 	public String addCandidatePage(Model model) {
 		
+		
+		model.addAttribute("viewCandidates", candidateService.showCandidateDetails());
 		model.addAttribute("addCandidateDto", new AddCandidateDto());
 		return "addcandidate";
 		
@@ -47,14 +50,7 @@ public class AddCandidateController {
 		model.addAttribute("viewCandidates", candidateService.showCandidateDetails());
 		return "viewcandidates";
 		
-	}
-	
-	
-	
-	
-	
-	
-	
+	}	
 	
 	
 	@PostMapping("/addcandidate")
@@ -88,8 +84,31 @@ public class AddCandidateController {
 	}
 	
 	
+	@PostMapping("/viewcandidates/delete/{id}")
+	public String deleteCandidateByCode(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+		
+		if(candidateService.candidateHasAcReference(id)) {
+			
+			redirectAttributes.addFlashAttribute("deleteWarningId", id);
+			redirectAttributes.addFlashAttribute("message", "This candidate has existing assembly constituencies assigned to them, delete anyway?");
+			return "redirect:/addcandidate";
+			
+		}
+		
+		candidateService.deleteByCode(id);
+		return "redirect:/addcandidate";
+		
+	}
 	
 	
+	
+	@PostMapping("/viewcandidates/confirmdelete/{id}")
+	public String confirmDeleteCandidateByCode(@PathVariable Long id) {
+		
+		candidateService.deleteByCode(id);
+		return "redirect:/addcandidate";
+		
+	}
 	
 	
 	

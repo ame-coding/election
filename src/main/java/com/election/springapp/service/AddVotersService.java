@@ -45,5 +45,11 @@ public class AddVotersService {
 	
 	}
 	
+	public void deleteById(Long id) {
+		
+		addVotersRepo.deleteById(id);
+		
+	}
+	
 	
 }
