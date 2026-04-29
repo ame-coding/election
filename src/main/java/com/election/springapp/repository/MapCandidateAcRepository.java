@@ -1,8 +1,12 @@
 package com.election.springapp.repository;
 
+import java.util.List;
+
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.election.springapp.model.CandidatesAcsMap;
 import com.election.springapp.model.MapCandidateAcDto;
 
 @Repository
@@ -40,6 +44,23 @@ public class MapCandidateAcRepository {
 		return count !=null && count>0;
 		
 	}
+	
+	public List<CandidatesAcsMap> findAll(){
+		
+		String sql="SELECT map.candidatecode, map.acno, can.candidatename, ac.acname FROM masterstrends.candidatesacsmap map JOIN masterstrends.candidates can ON map.candidatecode=can.candidatecode JOIN masters.assemblyconstituencies ac ON map.acno=ac.acno ORDER BY map.candidatecode";
+		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(CandidatesAcsMap.class));
+		
+		
+	}
+	
+	public void deleteByCandidatecodeAndAcno(Long code, Long acno) {
+		
+		String sql="DELETE FROM masterstrends.candidatesacsmap WHERE candidatecode = ? AND acno = ?";
+		jdbcTemplate.update(sql, code, acno);
+		
+		
+	}
+	
 	
 	public void deleteByCandidatecode(Long code) {
 		

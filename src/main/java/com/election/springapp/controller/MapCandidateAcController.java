@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -33,10 +34,13 @@ public class MapCandidateAcController {
 	public String mapCandidateAcPage(Model model) {
 		
 		model.addAttribute("mapCandidateAcDto", new MapCandidateAcDto());
+		model.addAttribute("viewCandidatesAcMap", mapCandidateAcService.findAll());
 		
 		return "mapcandidateac";
 		
 	}
+	
+	
 	
 	
 	@PostMapping("mapcandidateac")
@@ -74,7 +78,13 @@ public class MapCandidateAcController {
 		
 	}
 	
-	
+	@PostMapping("mapcandidateac/delete/{code}/{acno}")
+	public String deleteCandidateByCodeAndAcno(@PathVariable Long code, @PathVariable Long acno) {
+		
+		mapCandidateAcService.deleteByCandidatecodeAndAcno(code, acno);
+		return "redirect:/mapcandidateac";
+		
+	}
 	
 	
 	

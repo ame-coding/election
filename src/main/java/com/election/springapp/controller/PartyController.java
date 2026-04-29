@@ -79,12 +79,29 @@ public class PartyController {
 	
 	
 	@PostMapping("/parties/delete/{id}")
+	public String deletePartyByCode(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+		
+		
+		if(partyService.partyHasCandidateReference(id)) {
+			
+			redirectAttributes.addFlashAttribute("deleteWarningId", id);
+			redirectAttributes.addFlashAttribute("message", "This party has existing candidates assigned to them, deleting would delete those candidates as well, delete anyway?");
+			return "redirect:/addparty";
+		}
+		
+		partyService.deleteById(id);
+		return "redirect:/addparty";
+		
+	}
+	
+	@PostMapping("/parties/confirmdelete/{id}")
 	public String deletePartyByCode(@PathVariable Long id) {
 		
 		partyService.deleteById(id);
 		return "redirect:/addparty";
 		
 	}
+	
 	
 	
 	@PostMapping("/addparty")

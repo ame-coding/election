@@ -1,9 +1,12 @@
 package com.election.springapp.service;
 
+import java.util.List;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.election.springapp.model.CandidatesAcsMap;
 import com.election.springapp.model.MapCandidateAcDto;
 import com.election.springapp.model.User;
 import com.election.springapp.repository.MapCandidateAcRepository;
@@ -36,6 +39,30 @@ public class MapCandidateAcService {
 		
 	}
 	
+	public List<CandidatesAcsMap> findAll(){
+		
+		return repo.findAll();
+		
+	}
+	
+	public boolean candidateHasAcReference(Long code) {
+		
+		return repo.candidateHasAcReference(code);
+		
+	}
+	
+	
+	public void deleteByCandidatecodeAndAcno(Long code, Long acno) {
+		
+		repo.deleteByCandidatecodeAndAcno(code, acno);
+		
+	}
+	
+	public void deleteByCandidatecode(Long code) {
+		
+		repo.deleteByCandidatecode(code);
+		
+	}
 	
 	
 }

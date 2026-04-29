@@ -7,6 +7,7 @@
 	<link rel="stylesheet" th:href="@{/css/card.css}">
 	<link rel="stylesheet" th:href="@{/css/form.css}">
 	<link rel="stylesheet" th:href="@{/css/table.css}">
+	<link rel="stylesheet" th:href="@{/css/warningbox.css}">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>	
 <body>
@@ -50,6 +51,16 @@
 				</form>
 			</div>
 
+			<br><br>
+			
+			<div th:if="${deleteWarningId}" class="warning-box">
+			    <p th:text="${message}" class="warning-message"></p>
+			    <form th:action="@{/parties/confirmdelete/{id}(id=${deleteWarningId})}" method="post">
+			        <button type="submit" class="button-type">Yes, delete anyway</button>
+			        <a th:href="@{/addparty}" class="button-cancel">Cancel</a>
+			    </form>
+			</div>
+			
 			<br><br>
 			
 			<input type="text" id="search" placeholder="Search..." oninput="filterTable()" class="search-input"/>

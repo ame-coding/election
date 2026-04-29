@@ -64,6 +64,20 @@ public class CandidateRepository {
 	}
 	
 	
+	public boolean partyHasCandidateReference(Long code) {
+		
+		String sql = "SELECT COUNT(*) FROM masterstrends.candidates WHERE partycode=?";
+		Integer count=jdbcTemplate.queryForObject(sql, Integer.class, code);
+		return count!=null && count>0;
+		
+	}
+	
+	public List<Long> findCandidatecodesByPartycode(Long partycode){
+		
+		String sql="SELECT candidatecode FROM masterstrends.candidates WHERE partycode=?";
+		return jdbcTemplate.queryForList(sql, Long.class, partycode);
+		
+	}
 	
 	public void deleteByCode(Long code) {
 		
@@ -71,6 +85,13 @@ public class CandidateRepository {
 		jdbcTemplate.update(sql, code);
 		
 	}
+	
+	/*public void deleteByPartyCode(Long code) {
+		
+		String sql = "DELETE from masterstrends.candidates WHERE partycode=?";
+		jdbcTemplate.update(sql,code);
+		
+	}*/
 	
 	
 	

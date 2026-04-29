@@ -3,31 +3,30 @@ package com.election.springapp.model;
 
 public class CandidatesAcsMap {
 	
-	private Integer candidateCode;
+	private Integer candidatecode;
 	
-	private String candidateName;
+	private String candidatename;
 	
 	private Integer acno;
 	
-	private String acName;
-	
-	
-	public Integer getCandidateCode() {
-		return candidateCode;
+	private String acname;
+
+	public Integer getCandidatecode() {
+		return candidatecode;
 	}
 
-	public void setCandidateCode(Integer candidateCode) {
-		this.candidateCode = candidateCode;
+	public void setCandidatecode(Integer candidatecode) {
+		this.candidatecode = candidatecode;
 	}
 
-	public String getCandidateName() {
-		return candidateName;
+	public String getCandidatename() {
+		return candidatename;
 	}
 
-	public void setCandidateName(String candidateName) {
-		this.candidateName = candidateName;
+	public void setCandidatename(String candidatename) {
+		this.candidatename = candidatename;
 	}
-	
+
 	public Integer getAcno() {
 		return acno;
 	}
@@ -36,13 +35,16 @@ public class CandidatesAcsMap {
 		this.acno = acno;
 	}
 
-	public String getAcName() {
-		return acName;
+	public String getAcname() {
+		return acname;
 	}
 
-	public void setAcName(String acName) {
-		this.acName = acName;
+	public void setAcname(String acname) {
+		this.acname = acname;
 	}
+	
+	
+
 
 	
 }

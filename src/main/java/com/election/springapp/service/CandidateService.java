@@ -8,17 +8,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.election.springapp.model.Candidate;
 import com.election.springapp.model.CandidateDetails;
 import com.election.springapp.repository.CandidateRepository;
-import com.election.springapp.repository.MapCandidateAcRepository;
 
 @Service
 public class CandidateService {
 	
 	private final CandidateRepository repo;
-	private final MapCandidateAcRepository mapCandidateAcRepository;
+	private final MapCandidateAcService mapCandidateAcService;
 	
-	public CandidateService (CandidateRepository repo, MapCandidateAcRepository mapCandidateAcRepository) {
+	public CandidateService (CandidateRepository repo, MapCandidateAcService mapCandidateAcService) {
 		this.repo=repo;
-		this.mapCandidateAcRepository=mapCandidateAcRepository;
+		this.mapCandidateAcService=mapCandidateAcService;
 	}
 	
 
@@ -40,19 +39,33 @@ public class CandidateService {
 		
 	}
 	
+	public boolean partyHasCandidateRefernce(Long code) {
+		
+		return repo.partyHasCandidateReference(code);
+		
+	}
+	
 	public boolean candidateHasAcReference(Long code){
 		
-		return mapCandidateAcRepository.candidateHasAcReference(code);
+		return mapCandidateAcService.candidateHasAcReference(code);
+		
+	}
+	
+	public List<Long> findCandidatecodesByPartyCode(Long partycode){
+		
+		return repo.findCandidatecodesByPartycode(partycode);
 		
 	}
 	
 	@Transactional
 	public void deleteByCode(Long code) {
 		
-		mapCandidateAcRepository.deleteByCandidatecode(code);
+		mapCandidateAcService.deleteByCandidatecode(code);
 		repo.deleteByCode(code);
 		
 	}
+	
+
 	
 		
 }
