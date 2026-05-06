@@ -48,15 +48,23 @@ public class CountingRoundsService {
 		
 	}
 	
+	public List<Integer> getRoundsByAcno(Long acno){
+		
+		return repo.getRoundsByAcno(acno);
+		
+	}
+	
+	
+	
 	public List<ViewCountingRounds> findAll(){
 		
 		return repo.findAll();
 		
 	}
 	
-	public void deleteById(Long acno, Long rounds) {
+	public void deleteById(Long acno, Long roundno) {
 		
-		repo.deleteById(acno,rounds);
+		repo.deleteById(acno,roundno);
 		
 	}
 	

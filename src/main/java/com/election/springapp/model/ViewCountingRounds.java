@@ -6,7 +6,7 @@ public class ViewCountingRounds{
 	
 	public String acname;
 	
-	public Long rounds;
+	public Long roundno;
 	
 	public String desc;
 
@@ -26,12 +26,12 @@ public class ViewCountingRounds{
 		this.acname = acname;
 	}
 
-	public Long getrounds() {
-		return rounds;
+	public Long getRoundno() {
+		return roundno;
 	}
 
-	public void setrounds(Long rounds) {
-		this.rounds = rounds;
+	public void setRoundno(Long roundno) {
+		this.roundno = roundno;
 	}
 
 	public String getDesc() {

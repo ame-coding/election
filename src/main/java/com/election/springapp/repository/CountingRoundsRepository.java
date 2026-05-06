@@ -23,7 +23,7 @@ public class CountingRoundsRepository {
 	
 	public Long getNextRoundNo(Long acno) {
 		
-		String sql = "SELECT COALESCE (MAX(rounds),0) + 1 FROM masterstrends.countingrounds WHERE acno = ?";
+		String sql = "SELECT COALESCE (MAX(roundno),0) + 1 FROM masterstrends.countingrounds WHERE acno = ?";
 		
 		return jdbcTemplate.queryForObject(sql, Long.class, acno);
 		
@@ -31,7 +31,7 @@ public class CountingRoundsRepository {
 	
 	public void save(CountingRounds cr, Long createdById) {
 		
-		String sql="INSERT INTO masterstrends.countingrounds (acno, rounds, userid) VALUES (?, ?, ?)";
+		String sql="INSERT INTO masterstrends.countingrounds (acno, roundno, userid) VALUES (?, ?, ?)";
 		
 		jdbcTemplate.update(sql, cr.getAcno(), cr.getRoundno(), createdById);
 		
@@ -39,7 +39,7 @@ public class CountingRoundsRepository {
 	
 	public void createCountingRounds(List<CountingRounds> rows, Long createdById) {
 		
-		String sql="INSERT INTO masterstrends.countingrounds (acno, rounds, description, userid) VALUES (?, ?, ?, ?)";
+		String sql="INSERT INTO masterstrends.countingrounds (acno, roundno, description, userid) VALUES (?, ?, ?, ?)";
 		
 		 List<Object[]> batchArgs = new ArrayList<>();
 		 
@@ -56,19 +56,28 @@ public class CountingRoundsRepository {
 		
 	}
 	
+	public List<Integer> getRoundsByAcno(Long acno){
+		
+		String sql="SELECT roundno FROM masterstrends.countingrounds WHERE acno=?";
+
+		return jdbcTemplate.queryForList(sql,Integer.class,acno);
+		
+	} 
+	
+	
 	public List<ViewCountingRounds> findAll(){
 		
-		String sql="SELECT ac.acno, ac.acname, r.rounds, r.description AS desc FROM masters.assemblyconstituencies ac RIGHT JOIN masterstrends.countingrounds r  ON ac.acno=r.acno WHERE ac.acno<99 ORDER BY ac.acno";
+		String sql="SELECT ac.acno, ac.acname, r.roundno, r.description AS desc FROM masters.assemblyconstituencies ac RIGHT JOIN masterstrends.countingrounds r  ON ac.acno=r.acno WHERE ac.acno<99 ORDER BY ac.acno";
 		
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ViewCountingRounds.class));
 		
 	}
 	
-	public void deleteById(Long acno, Long rounds) {
+	public void deleteById(Long acno, Long roundno) {
 		
-		String sql="DELETE FROM masterstrends.countingrounds WHERE acno=? AND rounds=?";
+		String sql="DELETE FROM masterstrends.countingrounds WHERE acno=? AND roundno=?";
 	
-		jdbcTemplate.update(sql,acno,rounds);
+		jdbcTemplate.update(sql,acno,roundno);
 		
 	}
 	

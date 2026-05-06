@@ -6,6 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.election.springapp.model.CandidateDetails;
 import com.election.springapp.model.CandidatesAcsMap;
 import com.election.springapp.model.MapCandidateAcDto;
 import com.election.springapp.model.User;
@@ -44,6 +45,13 @@ public class MapCandidateAcService {
 		return repo.findAll();
 		
 	}
+	
+	public List<CandidateDetails> getCandidatesByAcno(Long acno){
+		
+		return repo.getCandidatesByAcno(acno);
+		
+	}
+	
 	
 	public boolean candidateHasAcReference(Long code) {
 		

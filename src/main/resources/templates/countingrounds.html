@@ -63,10 +63,10 @@
 						<tr th:each="round: ${viewrounds}" th:data-id="${round.acno}">
 							<td th:text="${round.acno}"></td>
 							<td th:text="${round.acname}"></td>
-							<td th:text="${round.rounds}"></td>
+							<td th:text="${round.roundno}"></td>
 							<td th:text="${round.desc}"></td>
 							<td>
-							    <form th:action="@{/countingrounds/delete/{acno}/{rounds} (acno=${round.acno}, rounds=${round.rounds})}" method="post">
+							    <form th:action="@{/countingrounds/delete/{acno}/{rounds} (acno=${round.acno}, rounds=${round.roundno})}" method="post">
 							        <button type="submit" onClick="return confirm('Are you sure you want to delete this entry?')" class="btn-primary">Delete</button>
 							    </form>
 							</td>

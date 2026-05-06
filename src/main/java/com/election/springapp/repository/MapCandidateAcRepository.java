@@ -6,8 +6,10 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.election.springapp.model.CandidateDetails;
 import com.election.springapp.model.CandidatesAcsMap;
 import com.election.springapp.model.MapCandidateAcDto;
+import com.election.springapp.model.Party;
 
 @Repository
 public class MapCandidateAcRepository {
@@ -52,6 +54,33 @@ public class MapCandidateAcRepository {
 		
 		
 	}
+	
+	public List<CandidateDetails> getCandidatesByAcno(Long acno){
+		
+		String sql="SELECT c.candidatecode, c.candidatename, pt.partycode, pt.partyname, pt.partyabbr, pt.partysymbol FROM masterstrends.candidatesacsmap map "
+				+ "JOIN masterstrends.candidates c ON  map.candidatecode = c.candidatecode "
+				+ "JOIN masterstrends.parties pt ON c.partycode = pt.partycode "
+				+ "WHERE map.acno=?";
+		
+		return jdbcTemplate.query(sql, (rs, rowNum) -> {
+			CandidateDetails cd=new CandidateDetails();
+			cd.setCode(rs.getLong("candidatecode"));
+			cd.setName(rs.getString("candidatename"));
+			
+			Party p=new Party();
+			p.setCode(rs.getLong("partycode"));
+			p.setName(rs.getString("partyname"));
+			p.setAbbr(rs.getString("partyabbr"));
+			p.setSymbol(rs.getBytes("partysymbol"));
+			
+			cd.setParty(p);
+			
+			return cd;
+		}, acno);
+		
+		
+	}
+	
 	
 	public void deleteByCandidatecodeAndAcno(Long code, Long acno) {
 		
