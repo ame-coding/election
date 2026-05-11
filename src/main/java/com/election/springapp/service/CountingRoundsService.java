@@ -32,6 +32,15 @@ public class CountingRoundsService {
 	
 	public void createCountingRounds(CountingRounds cr) {
 		
+		Long expected=repo.getNextRoundNo(cr.getAcno());
+		
+		if(expected>0) {
+			
+			throw new IllegalArgumentException("Rounds are already added for this assembly constituency, delete existing ones to add new rounds!");
+			
+		}
+	
+		
 		List<CountingRounds> rows=new ArrayList<>();
 		Long createdById=securityUtils.getCurrentUserId();
 		

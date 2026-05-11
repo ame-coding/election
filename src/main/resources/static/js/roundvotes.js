@@ -51,12 +51,13 @@ $(document).ready(function(){
 			
 			const $container = $('#candidateContainer');
 			
-			candidates.forEach(c => {
+			candidates.forEach((c, index) => {
 				$container.append(`
 					<div class="card" data-candidate-id="${c.code}">
+						<input type="hidden" name="candidatevotes[${index}].candidatecode" value="${c.code}" />
 						<h3>${c.name}</h3>
 						<p>${c.party.name}</p>
-						<input type="number" class="form-control" data-candidate-id="${c.code}>" min="0" placeholder="Votes" />
+						<input type="number" class="form-control" name="candidatevotes[${index}].votes" min="0" placeholder="Votes" required/>	
 					</div>
 					`);
 				

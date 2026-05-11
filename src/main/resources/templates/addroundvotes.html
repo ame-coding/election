@@ -17,7 +17,7 @@
 	<div class="layout">
 		
 		<div th:replace="~{fragments/layout :: topnav}"></div>
-		<div th:replace="~{fragments/layout :: sidebar('addcandidate')}"></div>	
+		<div th:replace="~{fragments/layout :: sidebar('roundvotes')}"></div>	
 		
 		<main class="main">
 			
@@ -28,10 +28,10 @@
 			
 			<div class="form-wrapper">
 				
-				<form id="addroundvotes" method="post">
+				<form id="addroundvotes" method="post" th:action="@{/roundvotes/submit}">
 					<div class="form-group">
 						<label>Assembly Contituency</label>
-						<select class="form-control" name="acdropdown" id="acdropdown" <!--th:field="*{acno}"--> required>
+						<select class="form-control" name="acno" id="acdropdown" required>
 							<option value="">Select Assembly Constituency</option>
 						</select>
 						<span id="acdropdown-error" class="form-error"></span>
@@ -40,7 +40,7 @@
 				
 					<div class="form-group">
 						<label>Round No.</label>
-						<select class="form-control" name="roundsdropdown" id="roundsdropdown" <!--th:field="*{roundno}"--> required>
+						<select class="form-control" name="roundno" id="roundsdropdown" required>
 							<option value="">Select Round</option>
 						</select>
 						<!--<span th:if="${#fields.hasErrors('roundno')}" th:errors="*{roundno}" class="form-error"></span>	-->			
@@ -49,6 +49,9 @@
 					<div class="form-group">
 						<div id="candidateContainer"></div>
 					</div>
+					
+					<button type="submit" class="btn-primary">Enter</button>
+					
 				</form>
 				
 				

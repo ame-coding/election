@@ -72,8 +72,8 @@ public class CountingRoundsController {
 			
 		} catch (IllegalArgumentException e) {
 			
-			model.addAttribute("errorMessage", e.getMessage());
-			return "countingrounds";
+			redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+			return "redirect:/countingrounds";
 			
 		} catch (DataAccessException e) {
 			
