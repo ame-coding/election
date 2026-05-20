@@ -6,6 +6,7 @@
 	<link rel="stylesheet" th:href="@{/css/layout.css}">
 	<link rel="stylesheet" th:href="@{/css/card.css}">
 	<link rel="stylesheet" th:href="@{/css/form.css}">
+	<link rel="stylesheet" th:href="@{/css/button.css}">
 	<link rel="stylesheet" th:href="@{/css/table.css}">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="/js/assemblyconstituency.js"></script>
@@ -41,7 +42,7 @@
 							<span id="roundno-error" class="form-error"></span>
 							<span th:if="${#fields.hasErrors('roundno')}" th:errors="*{roundno}" class="form-error"></span>
 						</div>
-						<button type="submit" class="btn-primary">Enter</button>
+						<button type="submit" class="btn btn-primary">Enter</button>
 					</form>
 				</div>
 				
@@ -67,7 +68,7 @@
 							<td th:text="${round.desc}"></td>
 							<td>
 							    <form th:action="@{/countingrounds/delete/{acno}/{rounds} (acno=${round.acno}, rounds=${round.roundno})}" method="post">
-							        <button type="submit" onClick="return confirm('Are you sure you want to delete this entry?')" class="btn-primary">Delete</button>
+							        <button type="submit" onClick="return confirm('Are you sure you want to delete this entry?')" class="btn btn-danger">Delete</button>
 							    </form>
 							</td>
 						</tr>

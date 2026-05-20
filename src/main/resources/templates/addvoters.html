@@ -6,6 +6,7 @@
 	<link rel="stylesheet" th:href="@{/css/layout.css}">
 	<link rel="stylesheet" th:href="@{/css/card.css}">
 	<link rel="stylesheet" th:href="@{/css/form.css}">
+	<link rel="stylesheet" th:href="@{/css/button.css}">
 	<link rel="stylesheet" th:href="@{/css/table.css}">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="/js/assemblyconstituency.js"></script>
@@ -47,7 +48,7 @@
 						<span th:if="${#fields.hasErrors('totalvotespolled')}" th:errors="*{totalvotespolled}" class="form-error"></span>
 					</div>
 					
-					<button type="submit" class="btn-primary">Enter</button>
+					<button type="submit" class="btn btn-primary">Enter</button>
 			</form>
 		</div>
 
@@ -73,7 +74,7 @@
 					<td th:text="${polled.votespolled == 0 ? '-':polled.votespolled}"></td>
 					<td>
 					    <form th:action="@{/votespolled/delete/{id}(id=${polled.acno})}" method="post">
-					        <button type="submit" onClick="return confirm('Are you sure you want to delete this entry?')" class="btn-primary">Delete</button>
+					        <button type="submit" onClick="return confirm('Are you sure you want to delete this entry?')" class="btn btn-danger">Delete</button>
 					    </form>
 					</td>
 				</tr>

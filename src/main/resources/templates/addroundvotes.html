@@ -6,6 +6,7 @@
 	<link rel="stylesheet" th:href="@{/css/layout.css}">
 	<link rel="stylesheet" th:href="@{/css/card.css}">
 	<link rel="stylesheet" th:href="@{/css/form.css}">
+	<link rel="stylesheet" th:href="@{/css/button.css}">
 	<link rel="stylesheet" th:href="@{/css/table.css}">
 	<link rel="stylesheet" th:href="@{/css/warningbox.css}">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -47,15 +48,42 @@
 					</div>
 					
 					<div class="form-group">
+						<label>Description</label>
+						<select class="form-control" name="description" id="descdropdown" required>
+							<option value="">Select Description</option>
+							<option value="EVM Counting">EVM Counting</option>
+							<option value="Postal Ballot">Postal Ballot</option>
+						</select>
+						<!--<span th:if="${#fields.hasErrors('roundno')}" th:errors="*{roundno}" class="form-error"></span>	-->			
+					</div>
+					
+					<div class="form-group">
 						<div id="candidateContainer"></div>
 					</div>
 					
-					<button type="submit" class="btn-primary">Enter</button>
+					<button type="submit" class="btn btn-primary">Enter</button>
 					
 				</form>
 				
 				
 			</div>
+			
+			<table id="acstatustable">
+				<thead>
+					<tr>
+						<th>Assembly Constituency</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="ac: ${acstatus}" class="ac-row" th:data-ac-id="${ac.acno}" style="cursor:pointer">
+						<td th:text="${ac.acno + ' - ' + ac.acname}"></td>
+						<td th:text="${ac.status}"></td>
+					</tr>
+					
+				</tbody>
+			</table>
+			
 			
 			
 		</main>

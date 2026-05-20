@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.election.springapp.model.CandidateDetails;
+import com.election.springapp.model.RoundStatusDTO;
 import com.election.springapp.model.VoteSubmissionForm;
 import com.election.springapp.service.RoundVotesService;
 
@@ -35,8 +37,9 @@ public class RoundVotesController {
 	}
 	
 	@GetMapping("/roundvotes")
-	public String roundvotesPage() {
+	public String roundvotesPage(Model model) {
 		
+		model.addAttribute("acstatus", service.getAllAssemblyConstituenciesWithStatus());
 		return "addroundvotes";
 		
 	}
@@ -59,6 +62,15 @@ public class RoundVotesController {
 		return service.getCandidatesByAcno(acno);
 		
 	}
+	
+	@GetMapping("/roundvotes/roundstatus")
+	@ResponseBody
+	public List<RoundStatusDTO> getRoundStatus(@RequestParam Long acno){
+		
+		return service.findRoundStatusByAc(acno);
+		
+	}
+	
 	
 	
 	@PostMapping("/roundvotes/submit")

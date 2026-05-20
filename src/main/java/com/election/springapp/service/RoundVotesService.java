@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.election.springapp.model.AcStatusDTO;
 import com.election.springapp.model.CandidateDetails;
 import com.election.springapp.model.CandidateVotes;
+import com.election.springapp.model.RoundStatusDTO;
 import com.election.springapp.model.VoteSubmissionForm;
 import com.election.springapp.repository.RoundVotesRepository;
 import com.election.springapp.util.SecurityUtils;
@@ -47,10 +49,24 @@ public class RoundVotesService {
 		
 		for(CandidateVotes cv : form.getCandidatevotes()) {
 			
-			repo.insertVote(form.getAcno(), form.getRoundno(), cv.getCandidatecode(), cv.getVotes(), createdById);
+			repo.insertVote(form.getAcno(), form.getRoundno(), form.getDescription(), cv.getCandidatecode(), cv.getVotes(), createdById);
 			
 		}
 		
 	}
+	
+	
+	public List<AcStatusDTO> getAllAssemblyConstituenciesWithStatus(){
+		
+		return repo.getAllAssemblyConstituenciesWithStatus();
+		
+	}
+	
+	public List<RoundStatusDTO> findRoundStatusByAc(Long acno){
+		
+		return repo.findRoundStatusByAc(acno);
+		
+	}
+	
 	
 }

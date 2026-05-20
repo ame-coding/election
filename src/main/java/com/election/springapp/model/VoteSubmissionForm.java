@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 public class VoteSubmissionForm {
 	
@@ -12,6 +13,9 @@ public class VoteSubmissionForm {
 	
 	@NotNull(message = "Round Number must be selected")
 	private Long roundno;
+	
+	@Pattern(regexp="Postal Ballot|EVM Counting", message="Description must be EVM Counting or Postal Ballot")
+	private String description;
 	
 	@NotNull(message = "No candidates found")
 	@NotEmpty(message = "No candidates found")
@@ -31,6 +35,14 @@ public class VoteSubmissionForm {
 
 	public void setRoundno(Long roundno) {
 		this.roundno = roundno;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public List<CandidateVotes> getCandidatevotes() {
